@@ -1,0 +1,1 @@
+var array = ['milk', 'peanuts', 'pineapple'];
