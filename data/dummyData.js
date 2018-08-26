@@ -1,1 +1,3 @@
-var array = ['milk', 'peanuts', 'pineapple'];
+var dummyData = ['milk', 'peanuts', 'pineapple'];
+
+export default dummyData;
