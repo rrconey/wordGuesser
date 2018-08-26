@@ -9,21 +9,16 @@ export default class Menu extends Component {
     super(props);
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-
 
   render() {
   	console.log('PROPS', this.props)
     return (<div>
-      <form >
+      <form onSubmit={this.props.handleSubmit}>
         <label>
           First Name:
-          <input type="text" onChange={ (event) => this.props.nameChange(event.target.value)} />
+          <input title='Letters(A-Z) ONLY!' type="text" onChange={ (event) => this.props.nameChange(event.target.value)} />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" className='btn btn-warning menu-btn' value="New Game" />
       </form>
       <h2>Hey {this.props.playerName}</h2>
       </div>
