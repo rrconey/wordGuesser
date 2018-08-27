@@ -151,9 +151,14 @@ createSpaces() {
   	console.log('rendered Data: ', this.state.api[100])
   	var menuPage = this.state.menuPage ? <Menu handleSubmit={this.handleSubmit} menuSubmit={this.menuSubmit} playerName={this.state.playerName} nameChange={this.changeName} /> : 
   	<Game guessLetter={this.guessLetter} playerName={this.state.playerName} currentWord={this.state.currentWord} spaces={this.state.spaces}/>
-    return (<div>
-      {menuPage}
-      </div>
+    return (
+    	<div className='container-fluid'>
+		<div className='row'>
+			<div className='col-md-4 col-sm-4 col-xs-12'></div>
+            {menuPage}
+			<div className='col-md-4 col-sm-4 col-xs-12'></div>
+		</div>
+	</div>
     );
   }
 }
