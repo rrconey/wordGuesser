@@ -12,7 +12,7 @@ export default class Word extends Component {
   render() {
   	console.log('Word PROPS', this.props)
     let boxes = '';
-    for(var i = 0; i < this.props.currentWord.length;i++) {
+    for(var i = 0; i < this.props.spaces.length;i++) {
       boxes += '_ '
     }
 

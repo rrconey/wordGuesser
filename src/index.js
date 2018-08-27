@@ -7,17 +7,18 @@ import Menu from './Menu';
 import Game from './Game';
 import Loss from './Loss';
 
+
 class App extends React.Component {
 	componentDidMount(){
-	  jQuery.ajax({
-	  url: 'http://app.linkedin-reach.io/words',
-	  success: (data) => {
-	    const allData = data.split('\n');
-        let randomWord = allData[Math.floor(Math.random()*allData.length)];
-	    this.setState({
-	    	api: allData, 
-	    	currentWord: randomWord})
-	    }
+	  // jQuery.ajax({
+	  // url: 'http://app.linkedin-reach.io/words',
+	  // success: (data) => {
+	  //   const allData = data.split('\n');
+   //      let randomWord = allData[Math.floor(Math.random()*allData.length)];
+	     this.setState({
+	    	//api: allData, 
+	    	currentWord:  'HAPPY' //|| randomWord})
+	    //}
 	  })
   }
 
@@ -28,10 +29,13 @@ class App extends React.Component {
     	api: [],
     	spaces: '',
     	guesses: new Set(),
+    	wrongGuesses: new Set(),
     	playerName: '',
+    	correctGuess: 0,
     	menuPage: true,
     	gamePage: false,
-    	gameOverCounter: 0
+    	gameOverCounter: 0,
+    	wrongCount: 0
     };
   this.changeName = this.changeName.bind(this);
   this.menuSubmit = this.menuSubmit.bind(this);
@@ -40,21 +44,99 @@ class App extends React.Component {
   }
 
   changeName(name) {
-    this.setState({playerName: name});
+    this.setState({playerName: name, spaces: this.createSpaces()});
   }
   
-  guessLetter(letter) {
-  	console.log('guess Letter HIT')
-  	console.log(letter)
-    this.setState({guesses: this.state.guesses.add(letter)})
-  	console.log(this.state.guesses)
+
+createSpaces() {
+  let dashed = this.state.currentWord.split('').map( (char) => "_").join('');
+  console.log('dasH: ', dashed)
+  return dashed
+}
+
+
+ 
+
+
+ guessLetter(currentWord, spacesArray, letter) {
+  if(this.state.guesses.has(letter)) {return }
+  
+  if(this.state.wrongGuesses.has(letter) ) {
+    console.log('you guessesed ' + letter + ' already!')
+    return
+    }
+
+  //console.log('wrongCount', wrongCount, guesses)
+   let count = 0;
+   let space = this.state.spaces
+   let word = this.state.currentWord;
+
+   console.log('space'+ space +' word ' + word)
+
+   for(let i = 0; i < space.length;i++) {
+    if(this.state.currentWord[i] === letter) {
+      this.setState({correctGuess: this.state.correctGuess + 1})
+      console.log('correct guess!')
+      if(!this.state.guesses.has(letter)) {
+      this.state.guesses = this.state.guesses.add(letter)}
+      count++
+      this.state.spaces[i] = letter
+    }
   }
+
+  if(count === 0 ) {
+    console.log('WRONG GUESS @', letter)
+    //this means a wrong guess has been made
+    this.state.wrongGuesses.add(letter)
+    return this.checkForGameover();
+  } else {
+    this.checkForWin();
+  }
+  //change state of empty 
+  this.state.spaces = spacesArray.join('')
+  console.log('Current FIELD: ', this.state.spaces)
+}
+
+  //  guessLetter(currentWord, spacesArray,letter) {
+  // 	console.log('guess Letter HIT ', letter)
+  //   this.setState({guesses: this.state.guesses.add(letter)})
+  // 	//console.log('guesses set: ' + this.state.guesses)
+
+  // }
+
+
+
+
+
+  checkForWin() {
+	  console.log('checking for WIN: ',this.state.correctGuess, this.state.currentWord.length)
+	  return this.state.correctGuess === this.state.currentWord.length ? console.log('WINNNNERRR!!!!!! won!') : null;
+  }
+
+
+  checkForGameover() {
+  this.state.wrongCount++;
+  if(this.state.wrongCount === 5) {
+    console.log('Be careful, final Guess!')
+  }
+  if(this.state.wrongCount >= 6) {
+    console.log('sorry you lost')
+    return 'sorry YOU LOST!'
+    }
+  }
+
 
   menuSubmit(event) {
   	console.log('menu submitted!')
     event.preventDefault();
   }
   
+  checkMatch(letter) {
+    console.log('letter clicked in checkMatch' + letter)
+
+  }
+
+
   handleSubmit(event) {
   	console.log('handleSubmit clicked!')
     //alert('A name was submitted: ' + this.state.playerName);
@@ -67,7 +149,8 @@ class App extends React.Component {
 
   render() {
   	console.log('rendered Data: ', this.state.api[100])
-  	var menuPage = this.state.menuPage ? <Menu handleSubmit={this.handleSubmit} menuSubmit={this.menuSubmit} playerName={this.state.playerName} nameChange={this.changeName} /> : <Game guessLetter={this.guessLetter} playerName={this.state.playerName} currentWord={this.state.currentWord}/>
+  	var menuPage = this.state.menuPage ? <Menu handleSubmit={this.handleSubmit} menuSubmit={this.menuSubmit} playerName={this.state.playerName} nameChange={this.changeName} /> : 
+  	<Game guessLetter={this.guessLetter} playerName={this.state.playerName} currentWord={this.state.currentWord} spaces={this.state.spaces}/>
     return (<div>
       {menuPage}
       </div>

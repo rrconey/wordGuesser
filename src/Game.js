@@ -12,9 +12,9 @@ export default class Game extends Component {
   }
 
   render() {
-    let row1 = 'abcdefghij'.split('').map( char => <LetterBox guessLetter={this.props.guessLetter} key={char} char={char.toUpperCase()}/> );
-    let row2 = 'klmnopqrst'.split('').map( char => <LetterBox guessLetter={this.props.guessLetter} key={char} char={char.toUpperCase()}/> );
-    let row3 = 'uvwxyz'.split('').map( char => <LetterBox guessLetter={this.props.guessLetter} key={char} char={char.toUpperCase()}/> );
+    let row1 = 'abcdefghij'.split('').map( char => <LetterBox currentWord={this.props.currentWord} spaces={this.props.spaces} guessLetter={this.props.guessLetter} key={char} char={char.toUpperCase()}/> );
+    let row2 = 'klmnopqrst'.split('').map( char => <LetterBox currentWord={this.props.currentWord} spaces={this.props.spaces} guessLetter={this.props.guessLetter} key={char} char={char.toUpperCase()}/> );
+    let row3 = 'uvwxyz'.split('').map( char => <LetterBox currentWord={this.props.currentWord} spaces={this.props.spaces} guessLetter={this.props.guessLetter} key={char} char={char.toUpperCase()}/> );
 
     
   	console.log('Game PROPS', this.props)
@@ -23,7 +23,7 @@ export default class Game extends Component {
       Game Page
       <h2>Computer vs. {this.props.playerName}</h2>
       <h2>The word is: {this.props.currentWord}</h2>
-      <Word currentWord={this.props.currentWord}/>
+      <Word spaces={this.props.spaces}/>
       <div className="container">
 
       </div>

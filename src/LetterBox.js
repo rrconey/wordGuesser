@@ -11,7 +11,7 @@ export default class LetterBox extends Component {
 
   render() {
     return (
-        <span onClick={() => this.props.guessLetter(this.props.char)} className="badge badge-pill badge-primary char">{this.props.char}</span>
+        <span onClick={() => this.props.guessLetter(this.props.currentWord, this.props.spaces,this.props.char)} className="badge badge-pill badge-primary char">{this.props.char}</span>
     );
   }
 }
