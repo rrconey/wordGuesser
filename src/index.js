@@ -8,15 +8,28 @@ import Game from './Game';
 import Loss from './Loss';
 
 class App extends React.Component {
-  
+	componentDidMount(){
+	  jQuery.ajax({
+	  url: 'http://app.linkedin-reach.io/words',
+	  success: (data) => {
+	    var allData = data.split('\n');
+	    this.setState({api: allData})
+	    }
+	  })
+  }
+
+
   constructor(props) {
     super(props);
     this.state = {
     	currentWord: 'happy',
+    	api: [],
+    	spaces: '',
     	guesses: new Set(),
     	playerName: '',
-    	menuPage: !true,
-    	gamePage: !false
+    	menuPage: true,
+    	gamePage: false,
+    	gameOverCounter: 0
     };
   this.changeName = this.changeName.bind(this);
   this.menuSubmit = this.menuSubmit.bind(this);
@@ -51,6 +64,7 @@ class App extends React.Component {
   }
 
   render() {
+  	console.log('rendered Data: ', this.state.api[100])
   	var menuPage = this.state.menuPage ? <Menu handleSubmit={this.handleSubmit} menuSubmit={this.menuSubmit} playerName={this.state.playerName} nameChange={this.changeName} /> : <Game guessLetter={this.guessLetter} playerName={this.state.playerName} currentWord={this.state.currentWord}/>
     return (<div>
       {menuPage}
