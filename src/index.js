@@ -12,17 +12,19 @@ class App extends React.Component {
 	  jQuery.ajax({
 	  url: 'http://app.linkedin-reach.io/words',
 	  success: (data) => {
-	    var allData = data.split('\n');
-	    this.setState({api: allData})
+	    const allData = data.split('\n');
+        let randomWord = allData[Math.floor(Math.random()*allData.length)];
+	    this.setState({
+	    	api: allData, 
+	    	currentWord: randomWord})
 	    }
 	  })
   }
 
-
   constructor(props) {
     super(props);
     this.state = {
-    	currentWord: 'happy',
+    	currentWord: '',
     	api: [],
     	spaces: '',
     	guesses: new Set(),
