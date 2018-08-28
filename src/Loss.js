@@ -14,11 +14,11 @@ export default class Loss extends Component {
     return (
          <div className='col-md-4 col-sm-4 col-xs-12'>
                 <form className="form-container">
-                <h1 className='gameover-heading'> Gameover! </h1>
+                <h1 className='gameover-heading'> Game Over! </h1>
                 <h4>Sorry,</h4><h4> the word was... </h4>
                 <h4 className='gameover-word'>{this.props.currentWord} </h4>
                <img id="snoopy" src='../img/lookUp.jpg' />
-               <button class="btn btn-warning btn-block">Restart</button>  
+               <button className="btn btn-warning btn-block">Start New Game</button>  
         </form>
       </div>
     );

@@ -25,14 +25,15 @@ export default class Game extends Component {
                 <h2>Computer vs. {this.props.playerName}</h2>
                 <h2>The word is: {this.props.currentWord}</h2>
                 <Word spaces={this.props.spaces}/>
-            <div className="form-group">
+            <div>
+              <p>Remaining Gueeses: {6 - this.props.wrongCount}</p>
             </div>
             <div className="container">
             {row1}
             {row2}
             {row3}
              </div>
-            
+
           </form>
          
 

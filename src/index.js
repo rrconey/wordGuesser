@@ -11,15 +11,15 @@ import Loss from './Loss';
 
 class App extends React.Component {
 	componentDidMount(){
-	  // jQuery.ajax({
-	  // url: 'http://app.linkedin-reach.io/words',
-	  // success: (data) => {
-	  //   const allData = data.split('\n');
-   //      let randomWord = allData[Math.floor(Math.random()*allData.length)];
+	  jQuery.ajax({
+	  url: 'http://app.linkedin-reach.io/words',
+	  success: (data) => {
+	    const allData = data.split('\n');
+        let randomWord = allData[Math.floor(Math.random()*allData.length)];
 	     this.setState({
-	    	//api: allData, 
-	    	currentWord:  'HAPPY' //|| randomWord})
-	    //}
+	    	api: allData, 
+	    	currentWord:  randomWord.toUpperCase()})
+	    }
 	  })
   }
 
@@ -33,10 +33,10 @@ class App extends React.Component {
     	wrongGuesses: new Set(),
     	playerName: 'Unknown',
     	correctGuess: 0,
-    	menuPage: !true,
+    	menuPage: true,
       gamePage: false,
     	gameOver: false,
-      win: !false,
+      win: false,
     	gameOverCounter: 0,
     	wrongCount: 0
     };
@@ -62,27 +62,50 @@ createSpaces() {
   if(this.state.guesses.has(letter)) {return }
   
   if(this.state.wrongGuesses.has(letter) ) {
-    console.log('you guessesed ' + letter + ' already!')
+    console.log('you guesseses ' + letter + ' already!')
     return
     }
 
   //console.log('wrongCount', wrongCount, guesses)
    let count = 0;
-   let space = this.state.spaces
+   let space = this.state.spaces // "_____ "
    let word = this.state.currentWord;
-
+   
    console.log('space'+ space +' word ' + word)
-
+   
    for(let i = 0; i < space.length;i++) {
-    if(this.state.currentWord[i] === letter) {
-      this.setState({correctGuess: this.state.correctGuess + 1})
-      console.log('correct guess!')
+    
+    if(word[i] === letter) {
+      this.setState({correctGuess: ++this.state.correctGuess })
+      console.log('correct guess!', this.state.currentWord[i], i , letter, this.state.correctGuess)
+      
+      //splits spaces array '_ _ _ _ _ '
+      // var temp = this.state.spaces.split('');
+      space = space.split('')
+
+
+      //adds correctLetter to spaces array
+      space[i] = letter
+      //"_ _ P  _ _ "
+
+      // console.log('TEMPONE', temp)
+      //turn spaces array back into string
+      space = space.join('');
+       
+       //'___P_'
+     
+
       if(!this.state.guesses.has(letter)) {
-      this.state.guesses = this.state.guesses.add(letter)}
+      var addition = this.state.guesses.add(letter)}
       count++
-      this.state.spaces[i] = letter
+      this.setState({guesses: addition})
+      
     }
+    
+    console.log('Line 100:', this.state.spaces)
   }
+  this.setState({spaces: space});
+  console.log('Line 109:', this.state.spaces)
 
   if(count === 0 ) {
     console.log('WRONG GUESS @', letter)
@@ -93,7 +116,7 @@ createSpaces() {
     this.checkForWin();
   }
   //change state of empty 
-  this.state.spaces = spacesArray.join('')
+  // this.state.spaces = spacesArray.join('')
   console.log('Current FIELD: ', this.state.spaces)
 }
 
@@ -107,22 +130,29 @@ createSpaces() {
 
   checkForWin() {
 	  console.log('checking for WIN: ',this.state.correctGuess, this.state.currentWord.length)
-	  return this.state.correctGuess === this.state.currentWord.length ? console.log('WINNNNERRR!!!!!! won!') : null;
+	  console.log('WINNNNERRR!!!!!! won!') 
+    
+    if(this.state.correctGuess === this.state.currentWord.length) {
+      this.setState({menuPage: false,
+      gamePage: false,
+      gameOver: false,
+      win: true})
+    }
+    
   }
-
+  
 
   checkForGameover() {
-  this.state.wrongCount++;
+  this.setState({wrongCount: ++this.state.wrongCount});
   if(this.state.wrongCount === 5) {
     console.log('Be careful, final Guess!')
   }
-  if(this.state.wrongCount >= 6) {
+  if(this.state.wrongCount > 5) {
     console.log('sorry you lost')
     this.setState({menuPage: false, gamePage: false, gameOver: true})
     return 'sorry YOU LOST!'
     }
   }
-
 
   menuSubmit(event) {
   	console.log('menu submitted!')
@@ -152,7 +182,7 @@ createSpaces() {
   	console.log('rendered Data: ', this.state.api[100])
     let currentPage;
   	if( this.state.menuPage) {currentPage = <Menu handleSubmit={this.handleSubmit} menuSubmit={this.menuSubmit} playerName={this.state.playerName} nameChange={this.changeName} /> }
-    if( this.state.gamePage) {currentPage = <Game guessLetter={this.guessLetter} playerName={this.state.playerName} currentWord={this.state.currentWord} spaces={this.state.currentWord}/> }
+    if( this.state.gamePage) {currentPage = <Game wrongCount={this.state.wrongCount} guessLetter={this.guessLetter} playerName={this.state.playerName} currentWord={this.state.currentWord} spaces={this.state.spaces}/> }
     if( this.state.gameOver) {currentPage = <Loss currentWord={this.state.currentWord} />}
     if( this.state.win) {currentPage = <Win currentWord={this.state.currentWord} />}
     return (

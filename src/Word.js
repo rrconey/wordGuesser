@@ -11,16 +11,22 @@ export default class Word extends Component {
 
   render() {
   	console.log('Word PROPS', this.props)
-    let boxes = '';
-    for(var i = 0; i < this.props.spaces.length;i++) {
-      boxes += '_ '
-    }
+    let boxes = this.props.spaces.split('').map( (char, index) => <li key={index} className='spaces'>{char}</li>)
 
     return (
       <div className="container">
-          {boxes.trim()}
+          <p>{this.props.spaces}</p>
+
+      <div id="menu-outer">
+        <div className="table">
+          <ul id="horizontal-list">
+            {boxes}
+          </ul>
+        </div>
+      </div>
+
+          
       </div>
     );
   }
 }
-

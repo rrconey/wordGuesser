@@ -18,7 +18,7 @@ export default class Menu extends Component {
 	      			<h2>P1: {this.props.playerName}</h2>
 				  	<div className="form-group">
 					    <label>Name:</label>
-					    <input type="text" maxlength="9" className="form-control" placeholder="Enter Name" onChange={ (event) => this.props.nameChange(event.target.value)}/>
+					    <input type="text" maxLength="9" className="form-control" placeholder="Enter Name" onChange={ (event) => this.props.nameChange(event.target.value)}/>
 					    <p>Enter name to play against the Computer!</p>
 				  	</div>
 				  	<div>
