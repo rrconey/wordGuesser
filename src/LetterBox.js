@@ -11,8 +11,12 @@ export default class LetterBox extends Component {
   }
 
   buttonPress() {
-  	console.log('BUtton Hit on')
-  	this.setState({buttonColor: 'badge badge-pill badge-danger char'})
+  	console.log('BUtton Hit on letter', this.props.char )
+    var correct = 'badge badge-pill badge-success char';
+    var incorrect = 'badge badge-pill badge-danger char';
+    var newColor = this.props.currentWord.includes(this.props.char) ? correct : incorrect;
+
+  	this.setState({buttonColor: newColor})
   }
 
   onClick() {
