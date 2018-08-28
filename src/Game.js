@@ -19,30 +19,22 @@ export default class Game extends Component {
     
   	console.log('Game PROPS', this.props)
     return (
-      <div>
-      Game Page
-      <h2>Computer vs. {this.props.playerName}</h2>
-      <h2>The word is: {this.props.currentWord}</h2>
-      <Word spaces={this.props.spaces}/>
-      <div className="container">
-
-      </div>
-     
+            <div className='col-md-4 col-sm-4 col-xs-12'>
+                <form className="form-container">
+                <h1> Word Guess </h1>
+                <h2>Computer vs. {this.props.playerName}</h2>
+                <h2>The word is: {this.props.currentWord}</h2>
+                <Word spaces={this.props.spaces}/>
+            <div className="form-group">
+            </div>
+            <div className="container">
+            {row1}
+            {row2}
+            {row3}
+             </div>
+            
+          </form>
          
-              <div className="container letterBox">
-              <LetterBox />
-              <div>
-                {row1}
-              </div>
-               <div>
-                {row2}
-              </div>
-              <div>
-                {row3}
-              </div>
-              </div>
-         
-
 
 
       </div>

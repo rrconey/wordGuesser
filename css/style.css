@@ -8,11 +8,21 @@ div .letterBox {
 }
 
 
-
+#snoopy {
+	height: 40%; 
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    margin-bottom: 10%;
+}
 .char {
 	margin-left: 14px
 }
 
+
+.gameover-word {text-align: center; color: #ffc107}
+.gameover-heading { color: #873534}
 
 body {background: url(../img/stickMen.jpg) repeat; width: 100%; height: 100vh; }
 

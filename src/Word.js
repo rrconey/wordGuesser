@@ -17,7 +17,7 @@ export default class Word extends Component {
     }
 
     return (
-      <div>
+      <div className="container">
           {boxes.trim()}
       </div>
     );

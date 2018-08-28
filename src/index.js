@@ -30,10 +30,11 @@ class App extends React.Component {
     	spaces: '',
     	guesses: new Set(),
     	wrongGuesses: new Set(),
-    	playerName: '',
+    	playerName: 'Unknown',
     	correctGuess: 0,
-    	menuPage: true,
-    	gamePage: false,
+    	menuPage: !true,
+      gamePage: false,
+    	gameOver: !false,
     	gameOverCounter: 0,
     	wrongCount: 0
     };
@@ -53,9 +54,6 @@ createSpaces() {
   console.log('dasH: ', dashed)
   return dashed
 }
-
-
- 
 
 
  guessLetter(currentWord, spacesArray, letter) {
@@ -88,7 +86,7 @@ createSpaces() {
     console.log('WRONG GUESS @', letter)
     //this means a wrong guess has been made
     this.state.wrongGuesses.add(letter)
-    return this.checkForGameover();
+    this.checkForGameover();
   } else {
     this.checkForWin();
   }
@@ -105,9 +103,6 @@ createSpaces() {
   // }
 
 
-
-
-
   checkForWin() {
 	  console.log('checking for WIN: ',this.state.correctGuess, this.state.currentWord.length)
 	  return this.state.correctGuess === this.state.currentWord.length ? console.log('WINNNNERRR!!!!!! won!') : null;
@@ -121,6 +116,7 @@ createSpaces() {
   }
   if(this.state.wrongCount >= 6) {
     console.log('sorry you lost')
+    this.setState({menuPage: false, gamePage: false, gameOver: true})
     return 'sorry YOU LOST!'
     }
   }
@@ -136,9 +132,12 @@ createSpaces() {
 
   }
 
-
   handleSubmit(event) {
   	console.log('handleSubmit clicked!')
+    if(!this.state.playerName) {
+      this.setState({playerName: 'Unknown'})
+
+    }
     //alert('A name was submitted: ' + this.state.playerName);
     event.preventDefault();
     this.setState({
@@ -149,13 +148,15 @@ createSpaces() {
 
   render() {
   	console.log('rendered Data: ', this.state.api[100])
-  	var menuPage = this.state.menuPage ? <Menu handleSubmit={this.handleSubmit} menuSubmit={this.menuSubmit} playerName={this.state.playerName} nameChange={this.changeName} /> : 
-  	<Game guessLetter={this.guessLetter} playerName={this.state.playerName} currentWord={this.state.currentWord} spaces={this.state.spaces}/>
+    let currentPage;
+  	if( this.state.menuPage) {currentPage = <Menu handleSubmit={this.handleSubmit} menuSubmit={this.menuSubmit} playerName={this.state.playerName} nameChange={this.changeName} /> }
+    if( this.state.gamePage) {currentPage = <Game guessLetter={this.guessLetter} playerName={this.state.playerName} currentWord={this.state.currentWord} spaces={this.state.currentWord}/> }
+    if( this.state.gameOver) {currentPage = <Loss currentWord={this.state.currentWord} />}
     return (
     	<div className='container-fluid'>
 		<div className='row'>
 			<div className='col-md-4 col-sm-4 col-xs-12'></div>
-            {menuPage}
+            {currentPage}
 			<div className='col-md-4 col-sm-4 col-xs-12'></div>
 		</div>
 	</div>
