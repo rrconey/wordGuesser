@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import dummyData from '../data/dummyData'
 import Menu from './Menu';
 import Game from './Game';
+import Win from './Win';
 import Loss from './Loss';
 
 
@@ -34,7 +35,8 @@ class App extends React.Component {
     	correctGuess: 0,
     	menuPage: !true,
       gamePage: false,
-    	gameOver: !false,
+    	gameOver: false,
+      win: !false,
     	gameOverCounter: 0,
     	wrongCount: 0
     };
@@ -152,6 +154,7 @@ createSpaces() {
   	if( this.state.menuPage) {currentPage = <Menu handleSubmit={this.handleSubmit} menuSubmit={this.menuSubmit} playerName={this.state.playerName} nameChange={this.changeName} /> }
     if( this.state.gamePage) {currentPage = <Game guessLetter={this.guessLetter} playerName={this.state.playerName} currentWord={this.state.currentWord} spaces={this.state.currentWord}/> }
     if( this.state.gameOver) {currentPage = <Loss currentWord={this.state.currentWord} />}
+    if( this.state.win) {currentPage = <Win currentWord={this.state.currentWord} />}
     return (
     	<div className='container-fluid'>
 		<div className='row'>
