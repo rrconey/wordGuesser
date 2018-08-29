@@ -15,24 +15,29 @@ export default class Game extends Component {
     let row1 = 'abcdefghij'.split('').map( char => <LetterBox currentWord={this.props.currentWord} spaces={this.props.spaces} guessLetter={this.props.guessLetter} key={char} char={char.toUpperCase()}/> );
     let row2 = 'klmnopqrst'.split('').map( char => <LetterBox currentWord={this.props.currentWord} spaces={this.props.spaces} guessLetter={this.props.guessLetter} key={char} char={char.toUpperCase()}/> );
     let row3 = 'uvwxyz'.split('').map( char => <LetterBox currentWord={this.props.currentWord} spaces={this.props.spaces} guessLetter={this.props.guessLetter} key={char} char={char.toUpperCase()}/> );
-
+    
+    let row4 = 'abcdefghijklmnopqrstuvwxyz'.split('').map( char => <LetterBox currentWord={this.props.currentWord} spaces={this.props.spaces} guessLetter={this.props.guessLetter} key={char} char={char.toUpperCase()}/> );
     
   	console.log('Game PROPS', this.props)
     return (
             <div className='col-md-4 col-sm-4 col-xs-12'>
                 <form className="form-container">
-                <h1> Word Guess </h1>
-                <h2>Computer vs. {this.props.playerName}</h2>
-                <h2>The word is: {this.props.currentWord}</h2>
+                <h1>Word Guess</h1>
+                <h2 className="game-center">Computer vs. {this.props.playerName}</h2>
                 <Word spaces={this.props.spaces}/>
             <div>
               <p>Remaining Gueeses: {6 - this.props.wrongCount}</p>
             </div>
             <div className="container">
-            {row1}
-            {row2}
-            {row3}
+           
              </div>
+
+
+             <div class="wrapperExample3">
+            {row4}
+            <div className='normal'/>
+
+</div>
 
           </form>
          

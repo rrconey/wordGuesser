@@ -31,7 +31,7 @@ class App extends React.Component {
     	spaces: '',
     	guesses: new Set(),
     	wrongGuesses: new Set(),
-    	playerName: 'Unknown',
+    	playerName: '',
     	correctGuess: 0,
     	menuPage: true,
       gamePage: false,
@@ -44,10 +44,11 @@ class App extends React.Component {
   this.menuSubmit = this.menuSubmit.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
   this.guessLetter = this.guessLetter.bind(this);
+
   }
 
   changeName(name) {
-    this.setState({playerName: name, spaces: this.createSpaces()});
+    this.setState({playerName: name});
   }
   
 
@@ -157,6 +158,7 @@ createSpaces() {
   menuSubmit(event) {
   	console.log('menu submitted!')
     event.preventDefault();
+
   }
   
   checkMatch(letter) {
@@ -165,6 +167,7 @@ createSpaces() {
   }
 
   handleSubmit(event) {
+    this.setState({spaces: this.createSpaces()})
   	console.log('handleSubmit clicked!')
     if(!this.state.playerName) {
       this.setState({playerName: 'Unknown'})
@@ -186,7 +189,7 @@ createSpaces() {
     if( this.state.gameOver) {currentPage = <Loss currentWord={this.state.currentWord} />}
     if( this.state.win) {currentPage = <Win currentWord={this.state.currentWord} />}
     return (
-    	<div className='container-fluid'>
+    <div className='container-fluid'>
 		<div className='row'>
 			<div className='col-md-4 col-sm-4 col-xs-12'></div>
             {currentPage}

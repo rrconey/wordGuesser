@@ -12,21 +12,16 @@ export default class Word extends Component {
   render() {
   	console.log('Word PROPS', this.props)
     let boxes = this.props.spaces.split('').map( (char, index) => <li key={index} className='spaces'>{char}</li>)
-
-    return (
-      <div className="container">
-          <p>{this.props.spaces}</p>
-
-      <div id="menu-outer">
-        <div className="table">
-          <ul id="horizontal-list">
-            {boxes}
-          </ul>
+      return (
+        <div className="container">
+          <div id="menu-outer">
+            <div className="table">
+              <ul id="horizontal-list">
+              {boxes}
+              </ul>
+            </div>
+          </div>    
         </div>
-      </div>
-
-          
-      </div>
-    );
+      );
   }
 }
