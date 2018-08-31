@@ -4,7 +4,6 @@ import LetterBox from './LetterBox';
 import Word from './Word';
 
 const Game = (props) => {
-  	console.log('Game PROPS', props);
     let rows = 'abcdefghijklmnopqrstuvwxyz'.split('').map( char => <LetterBox currentWord={props.currentWord} spaces={props.spaces} guessLetter={props.guessLetter} key={char} char={char.toUpperCase()}/> );
   return (
       <div className='col-md-4 col-sm-4 col-xs-12'>

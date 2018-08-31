@@ -156,14 +156,16 @@ class App extends React.Component {
   }
 
   checkForWin() {
-	  console.log('checking for WIN: ',this.state.correctGuess, this.state.currentWord.length)
-	  console.log('WINNNNERRR!!!!!! won!') 
-    
     if(this.state.correctGuess === this.state.currentWord.length) {
       this.setState({menuPage: false,
       gamePage: false,
       gameOver: false,
       win: true})
+    
+      jQuery.ajax({
+      type: "POST",
+      url: 'http://localhost:3000/win'
+      });
     }
     
   }
@@ -177,6 +179,12 @@ class App extends React.Component {
   if(this.state.wrongCount > 5) {
     console.log('sorry you lost')
     this.setState({menuPage: false, gamePage: false, gameOver: true})
+
+      jQuery.ajax({
+      type: "POST",
+      url: 'http://localhost:3000/loss'
+    });
+
     return 'sorry YOU LOST!'
     }
   }
