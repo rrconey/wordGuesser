@@ -1,5 +1,7 @@
-body {
-     background-color: #0077b5;
+ body {
+     background: url(../img/stickMen.jpg) repeat;
+     width: 100%;
+     height: 100vh;
 }
  div .letterBox {
      background-color: red font-size: 30px;
@@ -12,31 +14,25 @@ body {
      width: 100%;
      margin-bottom: 10%;
 }
-
-#profile {
-  border-radius: 3px;
+ #profile {
+     border-radius: 3px;
 }
-
  .char {
      margin-left: 14px 
 }
  .gameover-word {
-    text-align: center;
-     color: #ffc107
+     text-align: center;
+     color: #ffc107 
 }
  .gameover-heading {
-     color: #873534
+     color: #873534 
 }
- body {
-    background: url(../img/stickMen.jpg) repeat;
-     width: 100%;
-     height: 100vh;
-}
+
  .form-container {
      border: 3px solid #0077b5;
      padding: 60px 60px;
      background-color: #0077b5;
-     margin-top: 5vh;
+     margin-top: 12vh;
      -webkit-box-shadow: -3px 6px 78px 15px rgba(0,0,0,0.75);
      -moz-box-shadow: -3px 6px 78px 15px rgba(0,0,0,0.75);
      box-shadow: -3px 6px 78px 15px rgba(0,0,0,0.75);
@@ -46,14 +42,14 @@ body {
      margin-top: 15vh;
 }
  h1 {
-    color: white;
+     color: white;
      text-align:center;
-     margin-bottom: 5vh
+     margin-bottom: 5vh 
 }
  p {
-    color: white;
+     color: white;
      text-align:center;
-     margin-top: 0.2vh
+     margin-top: 0.2vh 
 }
  .game-center {
      text-align: center;
@@ -67,7 +63,7 @@ body {
      margin: 0 auto;
 }
  .spaces {
-    margin-left: 5px;
+     margin-left: 5px;
      font-size: 20px;
 }
  .table {
@@ -75,7 +71,6 @@ body {
     /* Allow the centering to work */
      margin: 0 auto;
 }
-
  ul#horizontal-list {
      list-style: none;
      text-align: center;
@@ -84,81 +79,75 @@ body {
      padding: 0px;
      padding-top: 20px;
 }
-
  ul#horizontal-list li {
      display: inline;
 }
-
-
-
-
-
-/*trying out*/
-.wrapperExample3 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+ .wrapperExample3 {
+     display: grid;
+     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+ .wrapperExample3 {
+     border: 0.3px solid #f76707;
+     border-radius: 2px;
+     background-color: #fff4e6;
+}
+ .nestedExample3 {
+     border: 1px solid #ffec99;
+     border-radius: 5px;
+     background-color: #fff9db;
+     padding: 2px;
+}
+ .normal {
+     border: 1px solid #ffa94d;
+     border-radius: 1px;
+     background-color: #ffd8a8;
+     padding: 1px;
+     color: #d9480f;
+     text-align: center 
+}
+ .incorrect {
+     border: 1px solid #ffa94d;
+     border-radius: 1px;
+     background-color: #d9480f;
+     padding: 1px;
+     color: #fff;
+     text-align: center 
+}
+ .correct {
+     border: 1px solid #ffa94d;
+     border-radius: 1px;
+     background-color: green;
+     padding: 1px;
+     color: #fff;
+     text-align: center 
+}
+ #mainTitle {
+     font-family: 'Mukta', sans-serif;
+     font-family: 'Kaushan Script', cursive;
+     margin-top: -25px;
+}
+ .win-heading {
+     color: #28a745;
+}
+ .menu_input {
+     margin-top: 25px;
+}
+ .game_submit {
+     border-radius: 3px;
+     margin: 10px auto;
+     display: block;
 }
 
-
-.wrapperExample3 {
-  border: 0.3px solid #f76707;
-  border-radius: 2px;
-  background-color: #fff4e6;
+.scoreboard-loss {
+     margin-top: -15px;
+     
+}
+ /* @font-face kit by Fonts2u (http://www.fonts2u.com) */ 
+ @font-face {font-family:"Stick Figures";src:url("1-26d83.eot?") format("eot"),url("1-26d83.woff") format("woff"),url("1-26d83.ttf") format("truetype"),url("1-26d83.svg#Stick_Figures") format("svg");font-weight:400;font-style:normal;}
+.stick {
+     font-family:"Stick Figures";
+     color:#fff;
+     font-size: 50px;
 }
 
-
-.nestedExample3 {
-  border: 1px solid #ffec99;
-  border-radius: 5px;
-  background-color: #fff9db;
-  padding: 2px;
-}
-
-
-.normal {
-	  border: 1px solid #ffa94d;
-  border-radius: 1px;
-  background-color: #ffd8a8;
-  padding: 1px;
-  color: #d9480f;
-  text-align: center
-}
-.incorrect {
-  border: 1px solid #ffa94d;
-  border-radius: 1px;
-  background-color: #d9480f;
-  padding: 1px;
-  color: #fff;
-  text-align: center
-}
-
-.correct {
-  border: 1px solid #ffa94d;
-  border-radius: 1px;
-  background-color: green;
-  padding: 1px;
-  color: #fff;
-  text-align: center
-}
-
-#mainTitle {
-font-family: 'Mukta', sans-serif;
-font-family: 'Kaushan Script', cursive;
-}
-
-.win-heading {
-  color: #28a745;
-}
-
-
-.menu_input {
-	margin-top: 25px;
-}
-
-
-.game_submit {
-   border-radius: 3px;
-   margin:  10px auto;
-  display: block;
-}
 

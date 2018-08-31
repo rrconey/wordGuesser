@@ -10,25 +10,10 @@ import Loss from './Loss';
 
 
 class App extends React.Component {
-	componentDidMount(){
-	  jQuery.ajax({
-	  url: 'http://app.linkedin-reach.io/words',
-	  success: (data) => {
-	    const allData = data.split('\n');
-        let randomNum = Math.floor(Math.random()*allData.length)
-        let randomWord = allData[randomNum];
-	     this.setState({
-	    	api: allData, 
-	    	currentWord:  randomWord.toUpperCase(), randomNum: randomNum})
-	    }
-	  })
-
-
-  }
-
   constructor(props) {
     super(props);
     this.state = {
+      posts: [],
       randomNum: 0,
     	currentWord: '',
     	api: [],
@@ -49,13 +34,38 @@ class App extends React.Component {
       mostUsed: 'etaoinsr',
       container: [],
       easyWords: [],
-      hardWords: []
+      hardWords: [], 
+      allTimeWins: 999,
+      allTimeLoss: 0
     };
   this.changeName = this.changeName.bind(this);
   this.menuSubmit = this.menuSubmit.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
   this.guessLetter = this.guessLetter.bind(this);
   this.difficultyClick = this.difficultyClick.bind(this);
+
+  }
+
+  componentDidMount(){
+    jQuery.ajax({
+    url: 'http://app.linkedin-reach.io/words',
+    success: (data) => {
+      const allData = data.split('\n');
+        let randomNum = Math.floor(Math.random()*allData.length)
+        let randomWord = allData[randomNum];
+       this.setState({
+        api: allData, 
+        currentWord:  randomWord.toUpperCase(), randomNum: randomNum})
+      }
+    })
+
+
+    // jQuery.ajax({url:'http://localhost:3000/',
+    //   success: (data) => {
+    //     console.log('data here', data)
+    //   }
+    // })
+
 
   }
   
@@ -225,10 +235,10 @@ class App extends React.Component {
 
   }
   
-  checkMatch(letter) {
-    console.log('letter clicked in checkMatch' + letter)
+  // checkMatch(letter) {
+  //   console.log('letter clicked in checkMatch' + letter)
 
-  }
+  // }
 
   handleSubmit(event) {
     this.setState({spaces: this.createSpaces()})
@@ -248,7 +258,7 @@ class App extends React.Component {
   render() {
   	console.log('rendered Data: ', this.state.api[100])
     let currentPage;
-  	if( this.state.menuPage) {currentPage = <Menu difficultyClick={this.difficultyClick}handleSubmit={this.handleSubmit} menuSubmit={this.menuSubmit} playerName={this.state.playerName} nameChange={this.changeName} /> }
+  	if( this.state.menuPage) {currentPage = <Menu wins={this.state.allTimeWins} loss={this.state.allTimeLoss} difficultyClick={this.difficultyClick}handleSubmit={this.handleSubmit} menuSubmit={this.menuSubmit} playerName={this.state.playerName} nameChange={this.changeName} /> }
     if( this.state.gamePage) {currentPage = <Game guessWord={this.guessWord} wrongCount={this.state.wrongCount} guessLetter={this.guessLetter} playerName={this.state.playerName} currentWord={this.state.currentWord} spaces={this.state.spaces}/> }
     if( this.state.gameOver) {currentPage = <Loss currentWord={this.state.currentWord} />}
     if( this.state.win) {currentPage = <Win currentWord={this.state.currentWord} />}
