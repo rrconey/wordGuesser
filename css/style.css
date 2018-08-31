@@ -143,7 +143,9 @@
      
 }
  /* @font-face kit by Fonts2u (http://www.fonts2u.com) */ 
- @font-face {font-family:"Stick Figures";src:url("1-26d83.eot?") format("eot"),url("1-26d83.woff") format("woff"),url("1-26d83.ttf") format("truetype"),url("1-26d83.svg#Stick_Figures") format("svg");font-weight:400;font-style:normal;}
+
+
+ @font-face {font-family:"Stick Figures";src:url("1-26d83.eot?") format("eot"),url("1-26d83.ttf") format("truetype"),url("1-26d83.svg#Stick_Figures") format("svg");font-weight:400;font-style:normal;}
 .stick {
      font-family:"Stick Figures";
      color:#fff;

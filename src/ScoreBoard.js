@@ -1,10 +1,5 @@
-console.log('you got this!')
-
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
-import dummyData from '../data/dummyData'
-
-
 
 const ScoreBoard = (props) => {
   return (
@@ -15,4 +10,3 @@ const ScoreBoard = (props) => {
 };
 
 export default ScoreBoard;
-
