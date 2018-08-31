@@ -52,12 +52,17 @@ class App extends React.Component {
       }
     })
 
-
-    // jQuery.ajax({url:'http://localhost:3000/',
-    //   success: (data) => {
-    //     console.log('data here', data)
-    //   }
-    // })
+    jQuery.ajax({url:'http://localhost:3000/',
+      success: (data) => {
+       
+        // console.log(data[wins], data['wins'])
+        data = JSON.parse(data)
+        var wins = data.wins
+        var loss = data.loss
+        console.log('wins', wins, loss)
+        this.setState({allTimeWins: wins, allTimeLoss: loss})
+      }
+    })
 
 
   }
