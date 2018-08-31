@@ -15,17 +15,21 @@ class App extends React.Component {
 	  url: 'http://app.linkedin-reach.io/words',
 	  success: (data) => {
 	    const allData = data.split('\n');
-        let randomWord = allData[Math.floor(Math.random()*allData.length)];
+        let randomNum = Math.floor(Math.random()*allData.length)
+        let randomWord = allData[randomNum];
 	     this.setState({
 	    	api: allData, 
-	    	currentWord:  randomWord.toUpperCase()})
+	    	currentWord:  randomWord.toUpperCase(), randomNum: randomNum})
 	    }
 	  })
+
+
   }
 
   constructor(props) {
     super(props);
     this.state = {
+      randomNum: 0,
     	currentWord: '',
     	api: [],
     	spaces: '',
@@ -38,26 +42,86 @@ class App extends React.Component {
     	gameOver: false,
       win: false,
     	gameOverCounter: 0,
-    	wrongCount: 0
+    	wrongCount: 0,
+      inputGuess: '',
+      difficultyObj: {},
+      difficulty: 0,
+      mostUsed: 'etaoinsr',
+      container: [],
+      easyWords: [],
+      hardWords: []
     };
   this.changeName = this.changeName.bind(this);
   this.menuSubmit = this.menuSubmit.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
   this.guessLetter = this.guessLetter.bind(this);
+  this.difficultyClick = this.difficultyClick.bind(this);
 
+  }
+  
+  setDifficulty(word) {
+  var obj = {}
+  obj.word = word;
+  var box = new Set()
+  var mostUsed = this.state.mostUsed;
+  for(var i = 0; i <  mostUsed.length; i++) {
+    if(word.includes(mostUsed[i])) {
+      box.add(mostUsed[i])
+    }   
+  }
+  
+  Array.from(box).length / word.length >= 0.5 ? obj.difficulty = 'easy' : obj.difficulty = 'hard'
+  
+    console.log('The word ' + obj.word + ' evaluates to: ', obj.difficulty)
+    return obj
   }
 
   changeName(name) {
     this.setState({playerName: name});
   }
   
+  easyMode() {
+    console.log('INSIDE easy MODe');
+    var easy = this.state.container.filter( item => item.difficulty === 'easy');
+    this.setState({easyWords: easy})
+    console.log('EASSYYYY', easy.length, easy[5])
+  }
+  
+  difficultyClick(levelClicked) {
+    console.log('the type was ' + levelClicked)
+    console.log('DiFFF: ', this.setDifficulty(this.state.currentWord).difficulty )
+    console.log('is there a match?!?!!?', this.setDifficulty(this.state.currentWord).difficulty === levelClicked)
+    var difficultyLevel = this.setDifficulty(this.state.currentWord)
+    var allData = this.state.api
+    var newWord;
 
-createSpaces() {
+    console.log('ALgorithm determined', difficultyLevel)
+    console.log('Button CLicked Value', levelClicked)
+    console.log('LLC are they the same?', difficultyLevel !== levelClicked)
+
+    while(difficultyLevel.difficulty !== levelClicked) {
+      
+      var allData = this.state.api;
+      var random = Math.floor(Math.random()*allData.length);
+      var newWord = allData[random]
+      difficultyLevel = this.setDifficulty(newWord)
+
+    }
+    
+    this.setState({currentWord: difficultyLevel.word.toUpperCase()})
+    // while( difficultyLevel !== levelClicked) {
+    //   console.log('wrong levels')
+    //   // console.log('neW WORD Created: ', this.setDifficulty(this.state.currentWord).word )
+    //   // newWord = allData[Math.floor(Math.random()*allData.length)];
+    // }
+    // this.setState({currentWord: newWord})
+  }
+
+  createSpaces() {
   let dashed = this.state.currentWord.split('').map( (char) => "_").join('');
   console.log('dasH: ', dashed)
   return dashed
-}
-
+  }
 
  guessLetter(currentWord, spacesArray, letter) {
   if(this.state.guesses.has(letter)) {return }
@@ -184,8 +248,8 @@ createSpaces() {
   render() {
   	console.log('rendered Data: ', this.state.api[100])
     let currentPage;
-  	if( this.state.menuPage) {currentPage = <Menu handleSubmit={this.handleSubmit} menuSubmit={this.menuSubmit} playerName={this.state.playerName} nameChange={this.changeName} /> }
-    if( this.state.gamePage) {currentPage = <Game wrongCount={this.state.wrongCount} guessLetter={this.guessLetter} playerName={this.state.playerName} currentWord={this.state.currentWord} spaces={this.state.spaces}/> }
+  	if( this.state.menuPage) {currentPage = <Menu difficultyClick={this.difficultyClick}handleSubmit={this.handleSubmit} menuSubmit={this.menuSubmit} playerName={this.state.playerName} nameChange={this.changeName} /> }
+    if( this.state.gamePage) {currentPage = <Game guessWord={this.guessWord} wrongCount={this.state.wrongCount} guessLetter={this.guessLetter} playerName={this.state.playerName} currentWord={this.state.currentWord} spaces={this.state.spaces}/> }
     if( this.state.gameOver) {currentPage = <Loss currentWord={this.state.currentWord} />}
     if( this.state.win) {currentPage = <Win currentWord={this.state.currentWord} />}
     return (

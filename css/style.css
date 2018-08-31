@@ -4,7 +4,7 @@ body {
  div .letterBox {
      background-color: red font-size: 30px;
 }
- #snoopy {
+ #snoopy, #profile {
      height: 40%;
      display: block;
      margin-left: auto;
@@ -12,6 +12,11 @@ body {
      width: 100%;
      margin-bottom: 10%;
 }
+
+#profile {
+  border-radius: 3px;
+}
+
  .char {
      margin-left: 14px 
 }
@@ -52,14 +57,17 @@ body {
 }
  .game-center {
      text-align: center;
-     font-size: 1em;
+     font-size: 1.2em;
+     color: #fff;
 }
  #menu-outer {
-     height: 84px;
-     background: lightblue ;
+     height: 50px;
+     background: lightblue;
+     border-radius: 2px;
+     margin: 0 auto;
 }
  .spaces {
-    margin-left: 10px;
+    margin-left: 5px;
      font-size: 20px;
 }
  .table {
@@ -67,12 +75,16 @@ body {
     /* Allow the centering to work */
      margin: 0 auto;
 }
+
  ul#horizontal-list {
      list-style: none;
-     width: 70%;
-     margin: auto;
+     text-align: center;
+     width: 100%;
+     margin: 0 auto;
+     padding: 0px;
      padding-top: 20px;
 }
+
  ul#horizontal-list li {
      display: inline;
 }
@@ -128,3 +140,25 @@ body {
   color: #fff;
   text-align: center
 }
+
+#mainTitle {
+font-family: 'Mukta', sans-serif;
+font-family: 'Kaushan Script', cursive;
+}
+
+.win-heading {
+  color: #28a745;
+}
+
+
+.menu_input {
+	margin-top: 25px;
+}
+
+
+.game_submit {
+   border-radius: 3px;
+   margin:  10px auto;
+  display: block;
+}
+
